@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(192, 192, 192, 0.296);
+    
+}
+
+header {
+    background: rgb(125,126,125);
+    background: -moz-linear-gradient(45deg, rgb(125,126,125) 0%, rgb(14,14,14) 100%);
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgb(125,126,125)), color-stop(100%,rgb(14,14,14)));
+    background: -webkit-linear-gradient(45deg, rgb(125,126,125) 0%,rgb(14,14,14) 100%);
+    background: -o-linear-gradient(45deg, rgb(125,126,125) 0%,rgb(14,14,14) 100%);
+    background: -ms-linear-gradient(45deg, rgb(125,126,125) 0%,rgb(14,14,14) 100%);
+    background: linear-gradient(45deg, rgb(125,126,125) 0%,rgb(14,14,14) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=1 );
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    text-align: left;
+}
+
+img{
+    max-width: 100px;
+    max-height: 100px;
+}
+div.nav {
+    background: rgb(169,3,41);
+    background: -moz-linear-gradient(45deg, rgb(169,3,41) 0%, rgb(143,2,34) 44%, rgb(109,0,25) 100%);
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgb(169,3,41)), color-stop(44%,rgb(143,2,34)), color-stop(100%,rgb(109,0,25)));
+    background: -webkit-linear-gradient(45deg, rgb(169,3,41) 0%,rgb(143,2,34) 44%,rgb(109,0,25) 100%);
+    background: -o-linear-gradient(45deg, rgb(169,3,41) 0%,rgb(143,2,34) 44%,rgb(109,0,25) 100%);
+    background: -ms-linear-gradient(45deg, rgb(169,3,41) 0%,rgb(143,2,34) 44%,rgb(109,0,25) 100%);
+    background: linear-gradient(45deg, rgb(169,3,41) 0%,rgb(143,2,34) 44%,rgb(109,0,25) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=1 );
+    height: 13px;
+    width: 100%;
+    margin: 0;
+}
+
+.nav {
+    margin-left: 0;
+    margin-bottom: 18px;
+    list-style: none;
+}
+section div {
+    background-color: rgba(0, 0, 0, 0.278);
+}
+.container {
+    display: flex;
+    align-items: center;
+}
+
+
+.clock {
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: bold;
+    justify-content: flex-end;
+    text-align: right;
+    color: rgb(255, 255, 255);
+}
+
+.clock span {
+    padding: 0 .02rem;
+}
+
+.logo {
+    margin-right: 52rem;
+   margin-left: 1rem; 
+}
+
+.logo img {
+    height: 4rem;
+width: auto;
+height: auto;
+    max-width: 100px;
+    max-height: 100px;
+}
