@@ -1,1 +1,1 @@
-# Autobusa-kust-bas-saraksta-informat-va-sist-ma
+# Autobusa-kustibas-saraksta-informativa-sistema
