@@ -14,3 +14,16 @@ setInterval(updateTime, 1000);
 
 // Initial update
 updateTime();
+document.getElementById('loginButton').addEventListener('click', function () {
+    document.getElementById('loginPanel').style.display = 'block';
+  });
+  
+  document.getElementById('loginForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+  
+    // Handle form submission here
+    // ...
+  
+    // Close the login panel
+    document.getElementById('loginPanel').style.display = 'none';
+  });
