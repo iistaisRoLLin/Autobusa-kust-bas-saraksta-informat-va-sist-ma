@@ -27,3 +27,13 @@ document.getElementById('loginButton').addEventListener('click', function () {
     // Close the login panel
     document.getElementById('loginPanel').style.display = 'none';
   });
+
+  if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+
+
+// LOGINS
+
+

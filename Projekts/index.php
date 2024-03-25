@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <script src="script.js" defer></script>
+  <?php 
+  require("connectDB.php")
+  ?>
 
 </head>
 <body>
@@ -46,5 +49,29 @@
 
 
 
+
+
+<?php
+
+if (isset($_POST['submit'])) {
+    
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) == 1) {
+        $user_data = mysqli_fetch_assoc($result);
+        $_SESSION['userid'] = $user_data['id'];
+        header("location: admin.php");
+    } else {
+
+        echo "Invalid username or password.";
+    }
+}
+
+mysqli_close($conn);
+?>
 </body>
 </html>
