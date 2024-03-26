@@ -13,7 +13,7 @@
 <?php 
   require("connectDB.php")
   ?>
-<table>
+<table >
   <thead>
     <tr>
       <th>Marsruts</th>
@@ -22,22 +22,145 @@
   </thead>
   <tbody>
     <?php
-    $query = "SELECT route_long_name FROM routes";
-    $result = mysqli_query($savienojums, $query);
-    $querys = "SELECT arrival_time FROM stop_times";
-    $results = mysqli_query($savienojums, $querys);
-    while( $rows = mysqli_fetch_array($results)){
-    while ($row = mysqli_fetch_array($result)){
+        $query = "SELECT busID, marsruts, laiks FROM test";
+        $result = mysqli_query($savienojums, $query);
+        while ($row = mysqli_fetch_array($result)){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Check if delete button is clicked
+  if (isset($_POST['delete'])) {
+      // Include your database connection file
+      include 'connectDB.php';
+
+      // Get the ID of the row to delete
+      $id = $_POST['delete'];
+
+      try {
+          // SQL to delete a record
+          $sql = "DELETE FROM test WHERE busID=?"; // assuming 'id' is the primary key
+
+          // Prepare the statement
+          $stmt = $savienojums->prepare($sql);
+
+          // Bind parameters
+          $stmt->bind_param('i', $id);
+
+          // Execute the statement
+          $stmt->execute();
+
+         // echo "Record with ID $id deleted successfully";
+         header("refresh:0");
+      } catch(PDOException $e) {
+        //  echo "Error: " . $e->getMessage();
+      }
+
+      // Close the connection
+      $savienojums = null;
+  }
+}
+
+
+
+
+
+echo "<div class='container'>";
+        echo "<tr>";
+        echo "<td>{$row['marsruts']}</td>";
+        echo "<td>{$row['laiks']}</td>";
+        echo "<td>
+                <form method='post' action='".htmlspecialchars($_SERVER["PHP_SELF"])."'>
+                    <input type='hidden' name='delete' value='{$row['busID']}'>
+                    <button type='submit'>Delete</button>
+                </form>
+              </td>";
+        echo "</tr>";
+        echo "</div>";
+    
     ?>
-    <tr>
-      <td><?php echo $row["route_long_name"]; ?></td>
-      <td><?php echo $rows["arrival_time"]; ?></td>
-    </tr>
+  
+
+    
     <?php
-    }}
+    }
+    
     ?>
+  
   </tbody>
 </table>
+
+
+<?php // Izmainu dala -----------------------------------------------------------------------------------------------------------------  ?>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Jaunumi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+        $query = "SELECT izmainasID, teksts FROM izmainas";
+        $result = mysqli_query($savienojums, $query);
+        while ($row = mysqli_fetch_array($result)){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Check if delete button is clicked
+  if (isset($_POST['delete'])) {
+      // Include your database connection file
+      include 'connectDB.php';
+
+      // Get the ID of the row to delete
+      $id = $_POST['delete'];
+
+      try {
+          // SQL to delete a record
+          $sql = "DELETE FROM izmainas WHERE izmainasID=?"; // assuming 'id' is the primary key
+
+          // Prepare the statement
+          $stmt = $savienojums->prepare($sql);
+
+          // Bind parameters
+          $stmt->bind_param('i', $id);
+
+          // Execute the statement
+          $stmt->execute();
+
+         // echo "Record with ID $id deleted successfully";
+         header("refresh:0");
+      } catch(PDOException $e) {
+        //  echo "Error: " . $e->getMessage();
+      }
+
+      // Close the connection
+      $savienojums = null;
+  }
+}
+
+
+
+        echo "<tr>";
+        echo "<td>{$row['teksts']}</td>";
+        echo "<td>
+                <form method='post' action='".htmlspecialchars($_SERVER["PHP_SELF"])."'>
+                    <input type='hidden' name='delete' value='{$row['izmainasID']}'>
+                    <button type='submit'>Delete</button>
+                </form>
+              </td>";
+        echo "</tr>";
+        echo "</div>";
+    ?>
+  
+
+    
+    <?php
+    }
+    
+    ?>
+  
+  </tbody>
+</table>
+
+
 
 </body>
 </html>

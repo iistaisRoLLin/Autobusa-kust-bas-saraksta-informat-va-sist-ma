@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-<div>
+    <div>
         <button id="loginButton">Login</button>
     </div>
         <div id="loginPanel">
@@ -44,8 +44,27 @@
             
         </div>
     </header>
-<footer>
-</footer>
+    <section>
+    <?php
+        $query = "SELECT busID, marsruts, laiks FROM test LIMIT 7";
+        $result = mysqli_query($savienojums, $query);
+        while ($row = mysqli_fetch_array($result)){
+
+
+echo "<div class='show'>";
+        echo "<tr>";
+        echo "<td>{$row['marsruts']}</td>";
+        echo "<td>  </td>";
+        echo "<td>{$row['laiks']}</td>";
+        echo "</tr>";
+        echo "</div>";
+
+        }
+    ?>
+    </section>
+    <footer>
+<h1>Izmaiņu sadaļa, vjg no datubazes</h1>
+    </footer>
 
 
 
@@ -64,14 +83,14 @@ if (isset($_POST['submit'])) {
     if (mysqli_num_rows($result) == 1) {
         $user_data = mysqli_fetch_assoc($result);
         $_SESSION['userid'] = $user_data['id'];
-        header("location: admin.php");
+        refresh("location: admin.php");
     } else {
 
         echo "Invalid username or password.";
     }
 }
 
-mysqli_close($conn);
+mysqli_close($savienojums);
 ?>
 </body>
 </html>
