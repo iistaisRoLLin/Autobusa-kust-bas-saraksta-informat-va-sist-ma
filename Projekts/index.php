@@ -60,11 +60,25 @@ echo "<div class='show'>";
         echo "</div>";
 
         }
+        ?>
+        <?php
+
+        $querys = "SELECT teksts FROM izmainas LIMIT 1";
+        $results = mysqli_query($savienojums, $querys);
+        while ($rowi = mysqli_fetch_array($results)){
+
+            echo "</section>";
+            echo "<footer>";
+       echo " <h1>{$rowi['teksts']}</h1>";
+           echo " </footer>";
+
+
+        }
     ?>
-    </section>
-    <footer>
+    <!-- </section>
+   <footer>
 <h1>Izmaiņu sadaļa, vjg no datubazes</h1>
-    </footer>
+    </footer> 
 
 
 
@@ -78,7 +92,7 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
 
     $query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
-    $result = mysqli_query($conn, $query);
+    $result = mysqli_query($savienojums, $query);
 
     if (mysqli_num_rows($result) == 1) {
         $user_data = mysqli_fetch_assoc($result);
