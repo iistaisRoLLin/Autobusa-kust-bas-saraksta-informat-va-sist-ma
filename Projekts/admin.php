@@ -1,3 +1,15 @@
+<?php
+// Start the session
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // If not logged in, redirect to the login page
+    header("Location: login_form.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="lv">
 
@@ -26,34 +38,29 @@
         $result = mysqli_query($savienojums, $query);
         while ($row = mysqli_fetch_array($result)){
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Check if delete button is clicked
+  
   if (isset($_POST['delete'])) {
-      // Include your database connection file
+      
       include 'connectDB.php';
 
-      // Get the ID of the row to delete
+     
       $id = $_POST['delete'];
 
       try {
-          // SQL to delete a record
-          $sql = "DELETE FROM test WHERE busID=?"; // assuming 'id' is the primary key
-
-          // Prepare the statement
+         
+          $sql = "DELETE FROM test WHERE busID=?"; 
           $stmt = $savienojums->prepare($sql);
-
-          // Bind parameters
           $stmt->bind_param('i', $id);
 
-          // Execute the statement
+          
           $stmt->execute();
 
-         // echo "Record with ID $id deleted successfully";
          header("refresh:0");
       } catch(PDOException $e) {
-        //  echo "Error: " . $e->getMessage();
+        
       }
 
-      // Close the connection
+     
       $savienojums = null;
   }
 }
@@ -102,47 +109,46 @@ echo "<div class='container'>";
     <?php
         $query = "SELECT izmainasID, teksts FROM izmainas";
         $result = mysqli_query($savienojums, $query);
-        while ($row = mysqli_fetch_array($result)){
+        while ($rowi = mysqli_fetch_array($result)){
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Check if delete button is clicked
+  
   if (isset($_POST['delete'])) {
-      // Include your database connection file
+     
       include 'connectDB.php';
 
-      // Get the ID of the row to delete
       $id = $_POST['delete'];
 
       try {
-          // SQL to delete a record
-          $sql = "DELETE FROM izmainas WHERE izmainasID=?"; // assuming 'id' is the primary key
+        
+          $sql = "DELETE FROM izmainas WHERE izmainasID=?"; 
 
-          // Prepare the statement
+        
           $stmt = $savienojums->prepare($sql);
 
-          // Bind parameters
+         
           $stmt->bind_param('i', $id);
 
-          // Execute the statement
+        
           $stmt->execute();
 
-         // echo "Record with ID $id deleted successfully";
+        
          header("refresh:0");
       } catch(PDOException $e) {
-        //  echo "Error: " . $e->getMessage();
+       
       }
 
-      // Close the connection
+      
       $savienojums = null;
   }
 }
 
 
-
+        echo "<div class='container'>";
         echo "<tr>";
-        echo "<td>{$row['teksts']}</td>";
+        echo "<td>{$rowi['teksts']}</td>";
         echo "<td>
                 <form method='post' action='".htmlspecialchars($_SERVER["PHP_SELF"])."'>
-                    <input type='hidden' name='delete' value='{$row['izmainasID']}'>
+                    <input type='hidden' name='delete' value='{$rowi['izmainasID']}'>
                     <button type='submit'>Delete</button>
                 </form>
               </td>";
@@ -151,6 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ?>
   
 
+ 
     
     <?php
     }

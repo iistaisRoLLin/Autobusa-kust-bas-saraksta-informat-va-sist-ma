@@ -37,3 +37,11 @@ document.getElementById('loginButton').addEventListener('click', function () {
 // LOGINS
 
 
+    document.addEventListener("DOMContentLoaded", function() {
+        // Replace 'your_restricted_page.php' with the URL of the page where you want the login panel to appear
+        if (window.location.href.includes('your_restricted_page.php')) {
+            document.querySelector('.login-panel').style.display = 'block';
+        }
+    });
+
+

@@ -44,6 +44,7 @@
             
         </div>
     </header>
+ 
     <section>
     <?php
         $query = "SELECT busID, marsruts, laiks FROM test LIMIT 7";
@@ -75,36 +76,13 @@ echo "<div class='show'>";
 
         }
     ?>
-    <!-- </section>
-   <footer>
-<h1>Izmaiņu sadaļa, vjg no datubazes</h1>
-    </footer> 
+  </section>
 
 
 
 
 
-<?php
 
-if (isset($_POST['submit'])) {
-    
-    $username = $_POST['username'];
-    $password = $_POST['password'];
 
-    $query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
-    $result = mysqli_query($savienojums, $query);
-
-    if (mysqli_num_rows($result) == 1) {
-        $user_data = mysqli_fetch_assoc($result);
-        $_SESSION['userid'] = $user_data['id'];
-        refresh("location: admin.php");
-    } else {
-
-        echo "Invalid username or password.";
-    }
-}
-
-mysqli_close($savienojums);
-?>
 </body>
 </html>

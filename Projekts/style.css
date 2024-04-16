@@ -188,8 +188,10 @@ height: auto;
   }
   .container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
-    gap: 20px; /* Gap between the tables */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+    display:flex;
+    margin-bottom: .1rem;
 }
 
 .table {
