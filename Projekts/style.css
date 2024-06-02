@@ -1,0 +1,249 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    
+
+    background-color: rgba(192, 192, 192, 0.296);
+    min-height: 100vh;
+} 
+
+section {
+  height: auto;
+  width: auto;
+}
+
+header {
+background: white;
+    position:sticky;
+    z-index: 1000;
+    width: 100%;
+    text-align: left;
+}
+
+img{
+    max-width: 100px;
+    max-height: 100px;
+}
+div.nav {
+  background:rgba(228,121,24,255);
+    height: 13px;
+    width: 100%;
+    margin: 0;
+}
+
+.nav {
+    margin-left: 0;
+    margin-bottom: 18px;
+    list-style: none;
+}
+section div {
+    background-color: rgba(0, 0, 0, 0.278);
+}
+ 
+
+
+.table-container {
+  display: inline-block;
+  width: 45%; /* Adjust width as needed */
+  vertical-align: top; /* Align tables at the top */
+  margin-right: 20px; /* Add spacing between tables */
+
+}
+
+.clock {
+    display: flex;
+    font-size: 2.7rem;
+    font-weight: bold;
+    justify-content: flex-end;
+    text-align: right;
+    margin-right: 3rem;
+    color: rgb(0, 0, 0);
+}
+
+.clock span {
+    padding: 0 .02rem;
+}
+
+.logo {
+
+}
+
+.logo img {
+    height: 4rem;
+width: auto;
+height: auto;
+    max-width: 200px;
+    max-height: 200px;
+} 
+#loginButton{
+    color: transparent;
+    background-color: transparent;
+    display: flex;
+    text-align: right;
+    align-content: right;
+    align-items: right;
+    
+}
+.current-time {
+    background-color: yellow;
+  }
+.show{
+  display: flex;
+  margin-top: 1rem;
+  background-color: rgba(192, 192, 192, 0);
+
+  font-size: 2rem;
+    font-weight: bold;
+
+}
+.show td{
+  padding: 0.rem;
+}
+
+
+.custom-table {
+  background-color: white;
+}
+
+
+
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+  }
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  button:active {
+    background-color: #3e8e41;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .malas{
+    padding: 2rem;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+    display:flex;
+    margin-bottom: .1rem;
+      display: flex;
+      align-items: center;
+     
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ffffff;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f2f2f2;
+}
+
+footer{
+  background-color: rgb(137, 137, 137);
+  color: white;
+  position:sticky;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+.container2 {
+  display: flex;
+  justify-content: space-between;
+}
+.section2 {
+  flex: 1;
+  border: 1px solid white;
+  padding: 20px;
+  margin: 0 10px;
+}
+.slider {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.text {
+  display: inline-block;
+  animation: slide 5s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.slider {
+  overflow: hidden;
+  white-space: nowrap;
+  background:rgba(228,121,24,255);
+}
+
+.text {
+  display: inline-block;
+  animation: slide 15s linear infinite;
+  color: black;
+width: 58%;
+  font-size: 2rem;
+}
+#otra{
+display: flex;
+display: grid;
+}
+
+.container > div {
+  flex: 1;
+}
+.div1, .div2 .div3 .div4 {
+  margin-bottom: 20px; /* You can adjust the margin to create space between them */
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+}
