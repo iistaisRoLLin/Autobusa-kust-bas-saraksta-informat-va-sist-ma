@@ -7,4 +7,5 @@ $port = "3307";
 
 
 $savienojums = new mysqli($servername, $username, $password, $dbname, $port);
+
 ?>

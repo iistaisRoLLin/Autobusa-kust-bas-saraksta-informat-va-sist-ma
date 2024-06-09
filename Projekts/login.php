@@ -3,7 +3,7 @@ $servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $dbname = "kustiba";
-$port = "3307"; 
+$port= "3307";
 
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
 
@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
+    $username = $_POST['username']; // Fix: Get username from POST data
     $password = $_POST['password'];
 
     $sql = "SELECT * FROM user WHERE username = ?";

@@ -1,6 +1,12 @@
 <?php
 
 function processFolderFromZip($zipUrl, $databaseConnection) {
+    // Enable LOCAL INFILE
+    $databaseConnection->options(MYSQLI_OPT_LOCAL_INFILE, true);
+
+    // Start a database transaction
+    $databaseConnection->begin_transaction();
+
     // Fetch the contents of the zip file
     $zipContents = file_get_contents($zipUrl);
 
@@ -35,6 +41,13 @@ function processFolderFromZip($zipUrl, $databaseConnection) {
                 // Prepare the table name based on the filename
                 $tableName = pathinfo($fileName, PATHINFO_FILENAME);
 
+                // Drop the table if it exists
+                $dropTableQuery = "DROP TABLE IF EXISTS `$tableName`";
+                if (!$databaseConnection->query($dropTableQuery)) {
+                    echo "Error dropping table $tableName: " . $databaseConnection->error;
+                    continue;
+                }
+
                 // Read the first line of the file to get column names and sample data
                 $file = fopen($extractedFilePath, "r");
                 $columns = fgetcsv($file);
@@ -42,10 +55,10 @@ function processFolderFromZip($zipUrl, $databaseConnection) {
                 fclose($file);
 
                 // Generate the CREATE TABLE query
-                $createTableQuery = "CREATE TABLE IF NOT EXISTS $tableName (";
+                $createTableQuery = "CREATE TABLE `$tableName` (";
                 foreach ($columns as $index => $column) {
                     // Determine data type and maximum length based on sample data
-                    $dataType = is_numeric($sampleData[$index]) ? 'INT' : 'VARCHAR(125)';
+                    $dataType = is_numeric($sampleData[$index]) ? 'INT' : 'VARCHAR(255)';
                     // If it's the first column, make it auto increment
                     if ($index === 0) {
                         $createTableQuery .= "`$column` $dataType AUTO_INCREMENT,";
@@ -56,27 +69,35 @@ function processFolderFromZip($zipUrl, $databaseConnection) {
                 $createTableQuery .= "PRIMARY KEY (`{$columns[0]}`))";
 
                 // Execute the CREATE TABLE query
-                $databaseConnection->query($createTableQuery);
+                if (!$databaseConnection->query($createTableQuery)) {
+                    echo "Error creating table $tableName: " . $databaseConnection->error;
+                    continue;
+                }
 
                 // Prepare the LOAD DATA INFILE query
-                $loadQuery = "LOAD DATA INFILE '" . $databaseConnection->real_escape_string($extractedFilePath) . "' 
-                              IGNORE INTO TABLE $tableName 
+                $loadQuery = "LOAD DATA LOCAL INFILE '" . $databaseConnection->real_escape_string($extractedFilePath) . "' 
+                              INTO TABLE `$tableName` 
                               FIELDS TERMINATED BY ',' ENCLOSED BY '\"' 
                               LINES TERMINATED BY '\\n' IGNORE 1 LINES";
 
                 // Execute the LOAD DATA INFILE query
-                $databaseConnection->query($loadQuery);
+                if (!$databaseConnection->query($loadQuery)) {
+                    echo "Error loading data into table $tableName: " . $databaseConnection->error;
+                }
 
                 // Remove the extracted file
                 unlink($extractedFilePath);
             }
         }
 
+        // Clean up extracted directory
+        rmdir($extractedDir);
+
         // Close the zip archive
         $zip->close();
 
-        // Clean up extracted directory
-        rmdir($extractedDir);
+        // Commit the transaction
+        $databaseConnection->commit();
     } else {
         echo "Unable to open zip file.";
     }
@@ -94,12 +115,14 @@ if ($databaseConnection->connect_error) {
     die("Connection failed: " . $databaseConnection->connect_error);
 }
 
+// Enable LOCAL INFILE for this connection
+$databaseConnection->options(MYSQLI_OPT_LOCAL_INFILE, true);
+
 // Call the function with the zip URL and database connection
 $zipUrl = 'https://www.atd.lv/sites/default/files/GTFS/gtfs-latvia-lv.zip';
 processFolderFromZip($zipUrl, $databaseConnection);
 
 // Close the database connection
 $databaseConnection->close();
-
 
 ?>

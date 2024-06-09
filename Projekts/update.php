@@ -26,7 +26,7 @@ $(document).ready(function(){
     // Refresh bus times every 15 seconds
     setInterval(function(){
         loadBusTimes();
-    }, 15000); // 15 seconds in milliseconds
+    }, 30000); // 15 seconds in milliseconds
 });
 </script>
 
