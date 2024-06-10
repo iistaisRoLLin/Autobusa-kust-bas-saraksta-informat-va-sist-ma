@@ -172,6 +172,7 @@ echo "<div class='show' id='busTimes'>";
 // Display the fourth table with the next 9 data
 echo "<div class='div'>";
 echo "<table class='custom-table'>";
+echo "<th> Aktuālie </th>";
 echo "<tr></tr>"; // Adding table headers for clarity
 while ($row = mysqli_fetch_assoc($result_table1)) {
     echo "<tr>";
@@ -202,6 +203,7 @@ echo "</div>";
 // Display the second table with the next 8 data
 echo "<div class='div2'>";
 echo "<table class='custom-table'>";
+
 echo "<tr></tr>"; // Adding table headers for clarity
 while ($row = mysqli_fetch_assoc($result_table3)) {
     echo "<tr>";
